@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import Gallery from './Components/Gallery'
+import SearchBar from './Components/SearchBar'
 
 function App() {
+  let [search, setSearch] = useState('The Grateful Dead')
+  let [message, setMessage] = useState('Search for Music!')
+      //instantiate the state value of 'data' as an empty array. We will plan for data to ultimately be an array of objects from the API return. So in order to prevent any type-based errors occuring, we should have the default value of that variable be the type that we intend on the data being.
+  let [data, setData] = useState([])
+
+  useEffect(() => {
+    fetch(`https://itunes.apple.com/search?term=${search}`) 
+      .then(response => response.json())
+      .then(({resultCount, results}) => {
+        const successMessage = `Successfully fetched ${resultCount} result(s)!`
+        const errorMessage = 'Not found'
+        setMessage(resultCount ? successMessage : errorMessage)
+        setData(results)
+        console.log(results)
+      })
+  }, [search])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SearchBar setSearch={setSearch}/>
+      {message}
+      <Gallery data={data}/>
     </div>
   );
 }
 
 export default App;
+
