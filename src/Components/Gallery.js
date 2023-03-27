@@ -4,7 +4,7 @@ function Gallery({data}) {
     let songs = data.filter((result) => result.kind === "song")
 
     return (
-        <div>
+        <div className='gallery'>
             {songs.map((song) => <GalleryItem song={song}/>)}
         </div>
     )

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function SearchBar({setSearch}) {
     const [query, setQuery] = useState('')
@@ -7,6 +7,11 @@ function SearchBar({setSearch}) {
         console.log(e.target.value)
         setQuery(e.target.value)
     }
+
+    //This is to perform the search as we type
+    useEffect(() => {
+        setSearch(query)
+    }, [query])
 
     const handleSubmit = (e) => {
         e.preventDefault()

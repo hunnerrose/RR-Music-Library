@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import Gallery from './Components/Gallery'
 import SearchBar from './Components/SearchBar'
 
+
 function App() {
   let [search, setSearch] = useState('The Grateful Dead')
   let [message, setMessage] = useState('Search for Music!')
       //instantiate the state value of 'data' as an empty array. We will plan for data to ultimately be an array of objects from the API return. So in order to prevent any type-based errors occuring, we should have the default value of that variable be the type that we intend on the data being.
   let [data, setData] = useState([])
+
 
   useEffect(() => {
     fetch(`https://itunes.apple.com/search?term=${search}`) 
@@ -22,9 +24,11 @@ function App() {
 
   return (
     <div>
-      <SearchBar setSearch={setSearch}/>
-      {message}
-      <Gallery data={data}/>
+
+        <SearchBar setSearch={setSearch}/>
+        {message}
+        <Gallery data={data}/>
+      
     </div>
   );
 }
