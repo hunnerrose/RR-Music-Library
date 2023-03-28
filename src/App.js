@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Gallery from './Components/Gallery'
 import SearchBar from './Components/SearchBar'
 import { DataContext } from './Context/DataContext'
-
+import { SearchContext } from './Context/SearchContext'
 
 
 function App() {
-  let [search, setSearch] = useState('The Grateful Dead')
+  // let [search, setSearch] = useState('The Grateful Dead')
   let [message, setMessage] = useState('Search for Music!')
       //instantiate the state value of 'data' as an empty array. We will plan for data to ultimately be an array of objects from the API return. So in order to prevent any type-based errors occuring, we should have the default value of that variable be the type that we intend on the data being.
   let [data, setData] = useState([])
+  let inputRef = useRef();
 
 
-  useEffect(() => {
+  const fetchData = (search) => {
+    document.title = inputRef.current.value
     fetch(`https://itunes.apple.com/search?term=${search}`) 
       .then(response => response.json())
       .then(({resultCount, results}) => {
@@ -22,12 +24,13 @@ function App() {
         setData(results)
         console.log(results)
       })
-  }, [search])
+  }
 
   return (
     <div>
-
-        <SearchBar setSearch={setSearch}/>
+        <SearchContext.Provider value={{ref: inputRef, fetchData}}>
+          <SearchBar/>
+        </SearchContext.Provider>
         {message}
         <DataContext.Provider value={data}>
           <Gallery />
