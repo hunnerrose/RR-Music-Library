@@ -5,7 +5,7 @@ import Gallery from './Components/Gallery'
 import SearchBar from './Components/SearchBar'
 import AlbumView from './Components/AlbumView'
 import ArtistView from './Components/ArtistView'
-
+import { DataContext } from './Context/DataContext'
 
 
 function App() {
@@ -33,7 +33,9 @@ function App() {
             <Route path="/" element={
               <div className="gallery">
                 <SearchBar setSearch={setSearch}/>
-                <Gallery data={data}/>
+                <DataContext.Provider value={data}>
+                  <Gallery/>
+                </DataContext.Provider>
               </div>
             }/>
             <Route path="/album/:id" element={<AlbumView />} />
