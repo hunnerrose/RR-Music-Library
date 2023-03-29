@@ -22,7 +22,6 @@ function App() {
         const errorMessage = 'Not found'
         setMessage(resultCount ? successMessage : errorMessage)
         setData(results)
-        console.log(results)
       })
   }, [search])
 

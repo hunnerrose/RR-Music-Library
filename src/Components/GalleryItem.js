@@ -7,7 +7,6 @@ function GalleryItem({song}) {
 
     const simpleStyle = {
         'width': '30%',
-        'height': '20vh',
         'border': '1px solid black',
         'margin': '2px',
         /* 'display': 'inline-block',
@@ -16,7 +15,6 @@ function GalleryItem({song}) {
 
     const detailStyle = {
         'width': '100%',
-        'height': '20vh',
         'border': '1px solid black',
         'margin': '2em',
         'backgroundImage': `url(${song.artworkUrl100})`,

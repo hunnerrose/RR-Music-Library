@@ -4,7 +4,6 @@ function SearchBar({setSearch}) {
     const [query, setQuery] = useState('')
 
     const handleChange = (e) => {
-        console.log(e.target.value)
         setQuery(e.target.value)
     }
 
